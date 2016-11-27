@@ -2,7 +2,7 @@
 #include "geomtry_msgs/PoseArray.h"
 #include "geometry_msgs/Pose.h"
 
-void percCallback(const geometry_msgs::PoseArray& points){
+void percCallback(const geometry_msgs::PoseArray& points){ // The motion planning stuff goes in here
 	int size = points.poses.size();
 	for(int i=0;i<=size;i++){
 		geometry_msgs::PoseArray targetPose;
