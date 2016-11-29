@@ -108,13 +108,13 @@ int main(int argc, char **argv)
   target_pose3.position.y += 0.2;
   target_pose3.position.x -= 0.2;
   waypoints.push_back(target_pose3);  // left
+  geometry_msgs::Pose target_pose4 = target_pose3;
 
   target_pose3.position.z += 0.4;
   target_pose3.position.y -= 0.4;
   //target_pose3.position.x -= 0.28;
   waypoints.push_back(target_pose3);  // up and left (back to start)
-  geometry_msgs::Pose target_pose4 = target_pose3;
-  target_pose4.position.x -= 0.28;
+  
   // We want the cartesian path to be interpolated at a resolution of 1 cm
   // which is why we will specify 0.01 as the max step in cartesian
   // translation.  We will specify the jump threshold as 0.0, effectively
@@ -145,7 +145,7 @@ int main(int argc, char **argv)
   primitive.type = primitive.BOX;
   primitive.dimensions.resize(3);
   primitive.dimensions[0] = 0.4;
-  primitive.dimensions[1] = 0.1;
+  primitive.dimensions[1] = 0.08;
   primitive.dimensions[2] = 0.4;
 
   /* A pose for the box (specified relative to frame_id) */
@@ -178,10 +178,10 @@ int main(int argc, char **argv)
   // Now when we plan a trajectory it will avoid the obstacle
   group.setStartState(*group.getCurrentState());
   geometry_msgs::Pose start_pose3;
-  start_pose2.orientation.w = 1.0;
-  start_pose2.position.x = 0.55;
-  start_pose2.position.y = 0.25;
-  start_pose2.position.z = 0.8;
+  start_pose3.orientation.w = 1.0;
+  start_pose3.position.x = 0.55;
+  start_pose3.position.y = -0.1;
+  start_pose3.position.z = 0.6;
   start_state.setFromIK(joint_model_group, start_pose3);
   group.setStartState(start_state);
   group.setPoseTarget(target_pose4);
@@ -192,29 +192,31 @@ int main(int argc, char **argv)
   /* Sleep to give Rviz time to visualize the plan. */
   sleep(10.0);
   
-
+////////////////////////////////////////////////////////////////////////////Attach the welding object
+/*
   // Now, let's attach the collision object to the robot.
   ROS_INFO("Attach the object to the robot");  
   group.attachObject(collision_object.id);  
-  /* Sleep to give Rviz time to show the object attached (different color). */
+  /* Sleep to give Rviz time to show the object attached (different color). 
   sleep(4.0);
 
 
   // Now, let's detach the collision object from the robot.
   ROS_INFO("Detach the object from the robot");  
   group.detachObject(collision_object.id);  
-  /* Sleep to give Rviz time to show the object detached. */
+  /* Sleep to give Rviz time to show the object detached. 
   sleep(4.0);
-
-
+*/
+/////////////////////////////////////////////////////////////////////////////////
   // Now, let's remove the collision object from the world.
+/*
   ROS_INFO("Remove the object from the world");  
   std::vector<std::string> object_ids;
   object_ids.push_back(collision_object.id);  
   planning_scene_interface.removeCollisionObjects(object_ids);
-  /* Sleep to give Rviz time to show the object is no longer there. */
+  /* Sleep to give Rviz time to show the object is no longer there. 
   sleep(4.0);
-
+*/
 
   ros::shutdown();  
   return 0;
