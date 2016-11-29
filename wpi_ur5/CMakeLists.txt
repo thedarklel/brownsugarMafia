@@ -32,3 +32,12 @@ link_directories(${catkin_LIBRARY_DIRS})
 add_executable(move_group_ur5 src/move_group_ur5.cpp)
 target_link_libraries(move_group_ur5 ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 install(TARGETS move_group_ur5 DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+add_executable(percPoints src/percPoints.cpp)
+target_link_libraries(percPoints ${catkin_LIBRARIES})
+add_dependencies(percPoints wpi_ur5_generate_messages_cpp)
+
+add_executable(percRec src/percRec.cpp)
+target_link_libraries(percRec ${catkin_LIBRARIES})
+add_dependencies(percRec wpi_ur5_generate_messages_cpp)
+
