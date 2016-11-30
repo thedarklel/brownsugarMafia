@@ -1,4 +1,4 @@
-/* Authors:*/
+/* Authors:brownsugarMafia*/
 
 #include <moveit/move_group_interface/move_group.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
