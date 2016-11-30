@@ -1,0 +1,21 @@
+<!DOCTYPE xml>
+<launch>
+
+	<!-- Launch the ur5 gazebo model -4 -->
+	<include file="$(find ur_gazebo)/launch/ur5.launch">
+		<arg name="limited" value="true" />
+	</include>
+
+	<!-- Launch moveit -4 -->
+	<include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch">
+		<arg name="sim" value="true"/>
+		<arg name="limited" value="true"/>
+	</include>
+
+	<!-- Run Rviz and load the default config to see the state of the move_group 
+		node -->
+	<include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch">
+		<arg name="config" value="true" />
+	</include>
+
+</launch>
